@@ -29,7 +29,7 @@ def numMatchSubseq(self, S: str, words: List[str]) -> int:
                 break
             else: # If found, take step position forward.
                 pos += found_pos + 1
-        matched_count += 1
+        matched_count += 1 
 
     return matched_count
 
