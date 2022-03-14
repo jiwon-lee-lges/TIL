@@ -7,4 +7,3 @@ ORDER BY INS.DATETIME ASC
 LIMIT 3
 
 ### 입양을 아직 못 간 동물들 중 가장 오래된 동물이므로, OUT.DATETIME (입양일) 정보가 없는 동물 중 보호시작일이 오래된 (빠른) 순으로 3개 조회함
- 
