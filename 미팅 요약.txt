@@ -1,0 +1,35 @@
+SAP HANA
+HKONT ECC 계정코드
+RACCT HANA 계정코드 8자리
+JE 전표별 금액 0이 나와도 전체 합계 0이 아닌 경우 - 클렌징 해야 하는 경우 (알트릭스 돌리기)
+LOG 파일 들어가면 RC - Row Count, ROW count 같은지 확인하기 - 같으면 클렌징 안 해도 됨
+정합성 안 맞으면 의심해보기
+태환쌤 양식으로 맞춰서 해드려야 함
+시트명까지 통일하기 - 캡처 확인하기
+예시 어디에?
+1. 파일명 - '정합성검증_CY', 시트명 - JE증감_CY, 알트릭스로 뽑은 JE Sum_Functional Amount 복붙하기
+2. TB도 로직 이용하는 것 - 비즈니스 유닛 코드, account length 바꾸기, FAG~ 파일 2020, 2021 따로 폴더에서 가져오기
+- SELECT에서 연도 바꿔주기, Formula 월 수 지정해주기, 1-9, 1-12, 1-13인 경우는 (내년 1월) subsequent가 있는 경우임
+3. TB에 파일 하나 만들어서 헤더파일까지 복붙해서 빈 파일에 붙여넣기 - 파일 명만 따로 지정
+TB 파일 정합성 검증에 move and copy 하면 됨
+4. TB 증감, JE 증감 계정 넘버 모두 불러와서 중복 제거, 정렬
+5. JE 증감_CY, Functional Beginning Balance, Functional Ending Balance, TB증감_CY, DIFF까지 붙여 넣기
+6. 위에 것들은 vlookup으로 다 가져오면 됨, TB 증감은 ending-beginning, diff는 증감 차이
+SAP HANA TB, JE, JE 증감은 알트릭스에서, TB<>JE 대사 확인은 수작업
+이상 있으면 1) 클렌징 라인수 보면서 확인하고 - FAG~ 파일로 하면 이 이슈 말고는 잘 없음
+근데도 이상 있으면 멘토쌤께 말씀드리기 - 금액 차이가 있을 경우 
+0으로 떨어질 때까지 하는게 정합성 검증
+TB, JE, 정합성 검증 2021, 2020 interim, 2020 모두 만들어야 함
+총 7개 파일이 만들어져야 함
+
+7. CoA 깡통 파일 준비하기
+CoA_Upload
+7-1. 계정명은 SKA1 파일에서 vlookup함, data - from text/CSV 파일 기능에서 load하면 됨
+7-2. SPRAS가 3인 것만 가져와야 함 (한국어)
+7-3. 그리드 라인 없애기, 열 굵기, 형광펜, 필터
+8. TB_CY move해서 가져오기
+9. TB 금액 vlookup - number 처리
+10. 정산표 오면 감사인제시재무제표 탭 컬러 바꾸고 생성, 그리드 라인 없애기 
+11. 옆에 받은 정산표 시트도 추가하기
+12. recon 추가하기
+- Grand Total까지 나오게, Grid line 없애기
